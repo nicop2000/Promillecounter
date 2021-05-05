@@ -1,0 +1,25 @@
+ul li {
+    background-color: red;
+    padding: 5px;
+    margin: 5px;
+}
+
+ul {
+    padding: 0;
+    list-style-type: none;
+    display: block;
+}
+
+ul li a:hover {
+
+}
+header h2 {
+    display: flex;
+    justify-content: center;
+}
+header nav button {
+    width: 40px;
+    height: 40px;
+    background-image: url("../icons/menu.svg");
+    clip-path: circle(40% at 50% 50%);
+}
