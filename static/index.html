@@ -1,44 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>Registrierung</title>
+    <title>Promille-Tracker</title>
+    <link rel="stylesheet" type="text/css"  href="./CSS/navbar.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/js/navbar.js"></script>
 </head>
 <body>
-    <h1>Registrierung</h1>
-    <form id="reg-form">
-        <input type="text" autocomplete="off" autocapitalize="off" id="username" placeholder="Username" />
-        <input type="password" autocomplete="off" autocapitalize="off" id="password" placeholder="Password" />
-        <input type="submit" value="Submit Form" />
-    </form>
+<header>
+    <nav>
+        <button type="button" onclick="toggleMenu()"></button>
 
-<script>const form = document.getElementById('reg-form');
-form.addEventListener('submit', registerUser);
+        <ul id="menu">
+            <li><a href="#">Einse</a></li>
+            <li><a href="#">Zweie</a></li>
+            <li><a href="#">Dreie</a></li>
+            <li><a href="#">Viere</a></li>
+        </ul>
+    </nav>
+    <h2>Promille-Tracker</h2>
+</header>
+
+<main>
 
 
-async function registerUser(event) {
-    event.preventDefault()
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
+</main>
 
-    const result = await fetch('/api/register', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            username,
-            password
-        })
-    }).then(res => res.json())
-
-    if(result.status === 'ok') {
-        //everything went fine
-    } else {
-        //error creatin user
-        alert(result.error);
-    }
-
-}</script>
 </body>
 </html>
