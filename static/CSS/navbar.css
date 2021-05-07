@@ -20,6 +20,6 @@ header h2 {
 header nav button {
     width: 40px;
     height: 40px;
-    background-image: url("../icons/menu.svg");
+    background-image: url("../../icons/menu.svg");
     clip-path: circle(40% at 50% 50%);
 }
