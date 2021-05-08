@@ -36,6 +36,7 @@ async function login(event) {
         console.log('Got the token :', result.data);
         //TODO: XSS -> CSP .., sanatizing the user input (<script>... -> siehe Hackingnight), ...
         localStorage.setItem('token',result.data);
+        alert('eingeloggt')
         //everything went fine
     } else {
         //error creatin user

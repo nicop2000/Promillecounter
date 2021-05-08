@@ -18,4 +18,12 @@ async function registerUser(event) {
         })
     }).then(res => res.json())
 
+    if (result.status === 'ok') {
+        //everything went fine
+        alert('hat geklappt')
+    } else {
+        //error creatin user
+        alert(result.error);
+    }
+
 }

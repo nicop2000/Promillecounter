@@ -7,6 +7,8 @@ const jwt = require('jsonwebtoken');
 const User = require('./model/user');
 require('dotenv').config()
 
+const PORT = process.env.PORT || 5000;
+
 mongoose.connect('mongodb://localhost:27017/login-app-db', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -14,10 +16,22 @@ mongoose.connect('mongodb://localhost:27017/login-app-db', {
 })
 
 const app = express();
-app.use('/', express.static(path.join(__dirname, 'static')));
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname + "/static/index.html"));
+});
 
 app.use(bodyParser.json());
+app.use(express.static(__dirname + "/static/"));
 
+app.get('/login', (req, res) => {
+    res.sendFile(path.join(__dirname + "/static/login.html"));
+})
+app.get('/register', (req, res) => {
+    res.sendFile(path.join(__dirname + "/static/register.html"));
+})
+app.get('/cp', (req, res) => {
+    res.sendFile(path.join(__dirname + "/static/change-password.html"));
+})
 app.post('/api/change-password', async (req, res) => {
     const {token, passwordNew: plainTextPassword} = req.body;
     console.log(req.body);
@@ -93,15 +107,12 @@ app.post('/api/register', async (req, res) => {
         }
         console.log(JSON.stringify(error));
         throw error
-
-
     }
-
     res.json({status: 'ok'})
 })
 
-app.listen(4000, () => {
-    console.log('Server up at 4000')
+app.listen(PORT, () => {
+    console.log('Server up at ', PORT);
 });
 
 
