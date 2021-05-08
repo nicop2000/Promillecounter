@@ -1,13 +1,13 @@
-const form = document.getElementById('reg-form');
-form.addEventListener('submit', registerUser);
+const form = document.getElementById('login-form');
+form.addEventListener('submit', loginUser);
 
 
-async function registerUser(event) {
+async function loginUser(event) {
     event.preventDefault()
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
 
-    const result = await fetch('/api/user/register', {
+    const result = await fetch('/api/user/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -18,9 +18,12 @@ async function registerUser(event) {
         })
     }).then(res => res.json())
 
-    if (result.status === 'ok') {
+    if(result.status === 'ok') {
+        console.log('Got the token :', result.data);
+        //TODO: XSS -> CSP .., sanatizing the user input (<script>... -> siehe Hackingnight), ...
+        localStorage.setItem('token',result.data);
+        alert('eingeloggt')
         //everything went fine
-        alert('hat geklappt')
     } else {
         //error creatin user
         alert(result.error);

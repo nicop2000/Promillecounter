@@ -1,0 +1,35 @@
+h2 {
+    font-family: "Atkinson";
+    font-weight: bold;
+}
+
+nav {
+    font-family: "Atkinson";
+}
+header nav ul li:last-child {
+    margin-right: 10px;
+}
+
+@font-face {
+    font-family: "Atkinson";
+    src: url("../fonts/AtHy-regular.woff");
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "Atkinson";
+    src: url("../fonts/AtHy-bold.woff");
+    font-weight: bold;
+}
+@font-face {
+    font-family: "Atkinson";
+    src: url("../fonts/AtHy-bold-italic.woff");
+    font-weight: bold;
+    font-style: italic;
+}
+@font-face {
+    font-family: "Atkinson";
+    src: url("../fonts/AtHy-italic.woff");
+    font-weight: normal;
+    font-style: italic;
+}
