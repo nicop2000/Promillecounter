@@ -18,9 +18,12 @@ async function registerUser(event) {
         })
     }).then(res => res.json())
 
+
     if (result.status === 'ok') {
         //everything went fine
+        document.getElementById('reg-form').reset();
         alert('hat geklappt')
+        location.href = '/'
     } else {
         //error creatin user
         alert(result.error);

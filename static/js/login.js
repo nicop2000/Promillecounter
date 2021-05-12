@@ -17,11 +17,11 @@ async function loginUser(event) {
             password
         })
     }).then(res => res.json())
+    console.log(result)
 
     if(result.status === 'ok') {
-        console.log('Got the token :', result.data);
-        //TODO: XSS -> CSP .., sanatizing the user input (<script>... -> siehe Hackingnight), ...
-        localStorage.setItem('token',result.data);
+        document.getElementById('login-form').reset();
+        location.href = '/'
         alert('eingeloggt')
         //everything went fine
     } else {

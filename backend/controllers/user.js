@@ -28,6 +28,11 @@ const register = async (req, res) => {
             username,
             password
         })
+        console.log(response)
+            const token = jwt.sign({id: response._id, username: response.username}, process.env.JWT_SECRET, {expiresIn: '12h'})
+            res.cookie('myToken', token);
+            res.cookie('loggedIn', true);
+
         console.log('User created successfully: ', response);
     } catch (error) {
         if (error.code === 11000) {
@@ -51,13 +56,24 @@ const login = async (req, res) => {
 
     if (await bcrypt.compare(password, user.password)) {
         //the username/password-combo is valid
-        const token = jwt.sign({id: user._id, username: user.username}, process.env.JWT_SECRET)
+        const token = jwt.sign({id: user._id, username: user.username}, process.env.JWT_SECRET, {expiresIn: '12h'})
+        res.cookie('myToken', token);
+        res.cookie('loggedIn', 'true');
+
         return res.json({status: 'ok', data: token});
     }
 
     return res.json({status: 'error', error: 'Benutzername oder Passwort falsch'});
 
 
+}
+
+
+const logout = async (req, res) => {
+    console.log('CLICKED LOGOUT');
+    res.cookie('myToken', 'loggedOut');
+    res.cookie('loggedIn', false);
+    return res.redirect('/');
 }
 
 const changePassword = async (req, res) => {
@@ -89,4 +105,4 @@ const changePassword = async (req, res) => {
     res.json({status: 'ok'});
 }
 
-module.exports = {register, login, changePassword} //is available with require in routes/user.js
+module.exports = {register, login, logout, changePassword} //is available with require in routes/user.js

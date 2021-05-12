@@ -1,14 +1,23 @@
+* {
+    font-family: Atkinson;
+}
+
 h2 {
-    font-family: "Atkinson";
+    font-family: Atkinson;
     font-weight: bold;
 }
 
-nav {
-    font-family: "Atkinson";
+#headlines {
+    display: flex;
+    justify-content: center;
+    padding-top: 0.5rem;
 }
-header nav ul li:last-child {
-    margin-right: 10px;
+
+output img {
+    width: 30rem;
 }
+
+
 
 @font-face {
     font-family: "Atkinson";

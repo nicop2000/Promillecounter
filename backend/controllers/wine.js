@@ -1,5 +1,6 @@
 const Wine = require('../model/wine');
-const auth = require('../helpers/authenticateAsUser')
+const auth = require('../middleware/authenticateAsUser')
+const jwt = require('jsonwebtoken')
 
 const mongoose = require('mongoose');
 require('dotenv').config()
@@ -13,21 +14,38 @@ mongoose.connect('mongodb://localhost:27017/data', {
 
 const addWine = async (req, res) => {
     console.log("Angekommen")
-    const {token, wine: newWine} = req.body;
+    const {wine: newWine} = req.body;
     console.log
     console.log(req.body)
-
-    const userAuth = auth.verifyJWT(token)
-    if(!userAuth.auth) {
-        return
+    const tokenTempAll = req.headers.cookie.split('=')
+    let tokenTemp = []
+    let token = ""
+    tokenTempAll.forEach(element => {
+        let temp = element.split(';')
+        temp.forEach(element => {
+            tokenTemp.push(element)
+        })
+    })
+    console.log(tokenTemp)
+    for (let i = 0; i < tokenTemp.length; i++) {
+        console.log('aktuelles i', tokenTemp[i])
+        if (tokenTemp[i].trim() === 'myToken') {
+            console.log('FOUND')
+            console.log(tokenTemp[i])
+            console.log(tokenTemp[i + 1])
+            token = tokenTemp[i + 1];
+            break;
+        }
     }
+    console.log('TOKEN', token)
 
-    try{
-
-        const userId = userAuth.id;
-        console.log(userAuth.id);
+    try {
+        const user = jwt.verify(token, process.env.JWT_SECRET)
+        const userId = user.id; //token holen
+        console.log(userId);
         console.log(userId, newWine);
         const list = await Wine.findOne({userId}).lean();
+        console.log(list, 'GEFUNDENER WEIN LIST')
         if (!list) {
             console.log('NEW LIST')
             const respone = await Wine.create({
@@ -56,4 +74,51 @@ const addWine = async (req, res) => {
     }
 }
 
-module.exports = {addWine}
+const showWine = async (req, res) => {
+    console.log("AngekommenShow")
+
+    const tokenTempAll = req.headers.cookie.split('=')
+    let tokenTemp = []
+    let token = ""
+    tokenTempAll.forEach(element => {
+        let temp = element.split(';')
+        temp.forEach(element => {
+            tokenTemp.push(element)
+        })
+    })
+    console.log(tokenTemp)
+    for (let i = 0; i < tokenTemp.length; i++) {
+        console.log('aktuelles i', i)
+        if (tokenTemp[i].trim() === 'myToken') {
+            console.log('FOUND')
+            console.log(tokenTemp[i])
+            console.log(tokenTemp[i + 1])
+            token = tokenTemp[i + 1];
+            break;
+        }
+    }
+    console.log('TOKEN', token)
+
+    try{
+        const user = jwt.verify(token, process.env.JWT_SECRET)
+        console.log('verified show wine')
+        const userId = user.id; //token holen
+        console.log(userId);
+
+        const list = await Wine.findOne({userId}).lean();
+        if (list) {
+            console.log('LISTE', list)
+
+            res.json({status: 'ok', data: list.wine});
+        } else {
+
+        }
+
+    } catch (error) {
+        console.log('ERRRROOOORRRR', error);
+        //alert('Etwas ist schiefgelaufen. Bitte logge dich aus und wieder ein')
+        return res.json({status: 'error', data: 'none', error: 'Noch keine Weine vorhanden'})
+    }
+}
+
+module.exports = {addWine, showWine}
