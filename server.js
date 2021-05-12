@@ -12,10 +12,7 @@ const PORT = process.env.PORT || 5000;
 
 const app = express();
 app.use(bodyParser.json());
-app.use(upload({
-    useTempFiles : true,
-    tempFileDir : '/tmp/'
-}));
+app.use(upload());
 app.use(express.static(__dirname + "/static/"));
 app.use('/resources',express.static(__dirname + '/backend/helpers'));
 app.use('/', router);

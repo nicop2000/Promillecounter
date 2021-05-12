@@ -129,7 +129,6 @@ const uploadImage =  (req, res) => {
         let file = req.files.file;
         let filename = file.name;
         console.log(filename);
-        file.mv('../uploads')
         file.mv('../uploads/' + filename, function (err) {
             if (err) {
                 res.json(err)
