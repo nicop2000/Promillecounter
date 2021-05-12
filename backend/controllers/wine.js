@@ -1,6 +1,7 @@
 const Wine = require('../model/wine');
 const auth = require('../middleware/authenticateAsUser')
 const jwt = require('jsonwebtoken')
+const upload = require('express-fileupload')
 
 const mongoose = require('mongoose');
 require('dotenv').config()
@@ -121,4 +122,23 @@ const showWine = async (req, res) => {
     }
 }
 
-module.exports = {addWine, showWine}
+const uploadImage =  (req, res) => {
+    console.log('Angekommen uploadImage')
+    if (req.files) {
+        console.log(req.files);
+        let file = req.files.file;
+        let filename = file.name;
+        console.log(filename);
+        file.mv('../uploads')
+        file.mv('../uploads/' + filename, function (err) {
+            if (err) {
+                res.json(err)
+
+            } else {
+                res.json({status: 'ok', data: 'Bild erfolgreich hochgeladen', path: ''});
+            }
+        })
+    }
+}
+
+module.exports = {addWine, showWine, uploadImage}

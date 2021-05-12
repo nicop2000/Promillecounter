@@ -73,27 +73,32 @@
 
                 <p>Bewertung</p>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="wineRating" id="rating-1" value="&#x2B50;" required>
+                    <input class="form-check-input" type="radio" name="wineRating" id="rating-1" value="&#x2B50;"
+                           required>
                     <label class="form-check-label" for="rating-1">&#x2B50;</label>
                 </div>
 
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="wineRating" id="rating-2" value="&#x2B50;&#x2B50;" required>
+                    <input class="form-check-input" type="radio" name="wineRating" id="rating-2"
+                           value="&#x2B50;&#x2B50;" required>
                     <label class="form-check-label" for="rating-2">&#x2B50;&#x2B50;</label>
                 </div>
 
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="wineRating" id="rating-3" value="&#x2B50;&#x2B50;&#x2B50;" required>
+                    <input class="form-check-input" type="radio" name="wineRating" id="rating-3"
+                           value="&#x2B50;&#x2B50;&#x2B50;" required>
                     <label class="form-check-label" for="rating-3">&#x2B50;&#x2B50;&#x2B50;</label>
                 </div>
 
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="wineRating" id="rating-4" value="&#x2B50;&#x2B50;&#x2B50;&#x2B50;" required>
+                    <input class="form-check-input" type="radio" name="wineRating" id="rating-4"
+                           value="&#x2B50;&#x2B50;&#x2B50;&#x2B50;" required>
                     <label class="form-check-label" for="rating-4">&#x2B50;&#x2B50;&#x2B50;&#x2B50;</label>
                 </div>
 
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="wineRating" id="rating-5" value="&#x2B50;&#x2B50;&#x2B50;&#x2B50;&#x2B50;" required>
+                    <input class="form-check-input" type="radio" name="wineRating" id="rating-5"
+                           value="&#x2B50;&#x2B50;&#x2B50;&#x2B50;&#x2B50;" required>
                     <label class="form-check-label" for="rating-5">&#x2B50;&#x2B50;&#x2B50;&#x2B50;&#x2B50;</label>
                 </div>
 
@@ -105,14 +110,14 @@
 
     <div class="col-sm-4">
 
-        <p><input type="file"  accept="image/*" name="image" id="file"  onchange="loadFile(event)" style="display: none;"></p>
-        <p><label for="file" style="cursor: pointer;">Upload Image</label></p>
-        <p><img id="my-image"/></p>
-        <div class="custom-file">
+        <form action="/api/wine/uploadImage" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" id="picture">
+            <input type="submit" value="upload">
+        </form>
 
 
-        </div>
     </div>
+</div>
 </div>
 <main id="test"></main>
 
