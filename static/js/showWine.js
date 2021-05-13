@@ -14,11 +14,12 @@ async function getWine() {
             let divRow = document.createElement('div');
             divRow.className = "row";
             let divCol1 = document.createElement('div');
-            let shopTemp = wines[i].shop;
-            let shop = shopTemp !== "" ? "Gekauft bei: " + shopTemp : "Kein Laden verfügbar";
-            let priceTemp = wines[i].price;
-            let price = priceTemp !== "" ? priceTemp + " €" : "Kein Preis verfügbar";
-            divCol1.innerHTML = `
+            if(wines[i] != null) {
+                let shopTemp = wines[i].shop;
+                let shop = shopTemp !== "" ? "Gekauft bei: " + shopTemp : "Kein Laden verfügbar";
+                let priceTemp = wines[i].price;
+                let price = priceTemp !== "" ? priceTemp + " €" : "Kein Preis verfügbar";
+                divCol1.innerHTML = `
                 <table>
                 <th>${wines[i].name}</th>
                 <tr><td>${wines[i].color}</td></tr>
@@ -28,10 +29,16 @@ async function getWine() {
                 <tr><td>${shop}</td></tr>
                 <tr><td><img src="${wines[i].picture}" alt="Kein Bild verfügbar"></td></tr>
             </table>`;
-            divCol1.className = "col";
-            divRow.appendChild(divCol1);
+                divCol1.className = "col";
+                divRow.appendChild(divCol1);
+            } else {
+                let divCol1 = document.createElement('div');
+                divCol1.innerHTML = ""
+                divRow.appendChild(divCol1);
+                divCol1.className = "col";
+            }
             let j = i + 1;
-            if (j < wines.length) {
+            if (j < wines.length  && wines[j] !== null) {
                 let shopTemp = wines[j].shop;
                 let shop = shopTemp !== "" ? "Gekauft bei: " + shopTemp : "Kein Laden verfügbar";
                 let priceTemp = wines[i].price;
@@ -56,7 +63,7 @@ async function getWine() {
                 divCol2.className = "col";
             }
             let k = j + 1;
-            if (k < wines.length) {
+            if (k < wines.length && wines[k] !== null) {
                 let shopTemp = wines[k].shop;
                 let shop = shopTemp !== "" ? "Gekauft bei: " + shopTemp : "Kein Laden verfügbar";
                 let priceTemp = wines[i].price;
