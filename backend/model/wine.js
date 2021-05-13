@@ -11,7 +11,7 @@ const WineSchema = new mongoose.Schema(
                 price: {type: String},
                 shop: {type: String},
                 rating: {type: String},
-                image: {type: String}
+                picture: {type: String}
             }
         ]
     },

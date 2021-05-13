@@ -7,6 +7,11 @@
     padding-bottom: 2rem;
 }
 
+table img {
+
+    width: 100%;
+}
+
 .row .col:nth-child(2n) {
     border-right: 1px solid black;
     border-left: 1px solid black;

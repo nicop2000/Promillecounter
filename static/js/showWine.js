@@ -26,6 +26,7 @@ async function getWine() {
                 <tr><td>${price}</td></tr>
                 <tr><td>${wines[i].rating}</td></tr>
                 <tr><td>${shop}</td></tr>
+                <tr><td><img src="${wines[i].picture}" alt="Kein Bild verfügbar"></td></tr>
             </table>`;
             divCol1.className = "col";
             divRow.appendChild(divCol1);
@@ -44,6 +45,7 @@ async function getWine() {
                 <tr><td>${price}</td></tr>
                 <tr><td>${wines[j].rating}</td></tr>
                 <tr><td>${shop}</td></tr>
+                <tr><td><img src="${wines[j].picture}" alt="Kein Bild verfügbar"></td></tr>
             </table>`;
                 divRow.appendChild(divCol2);
                 divCol2.className = "col";
@@ -68,6 +70,7 @@ async function getWine() {
                 <tr><td>${price}</td></tr>
                 <tr><td>${wines[k].rating}</td></tr>
                 <tr><td>${shop}</td></tr>
+                <tr><td><img src="${wines[k].picture}" alt="Kein Bild verfügbar"></td></tr>
             </table>`;
                 divRow.appendChild(divCol3);
                 divCol3.className = "col";
@@ -79,6 +82,10 @@ async function getWine() {
             }
             document.getElementById('main-container-wines').appendChild(divRow);
         }
+        let img = document.createElement("img");
+        img.src = wines[wines.length - 1].picture;
+        console.log(img);
+        // document.body.appendChild(img);
         let x = document.getElementsByClassName('col');
         console.log(x)
         x[x.length - 1].style.borderBottom = "0px solid black"

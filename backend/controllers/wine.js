@@ -127,14 +127,14 @@ const uploadImage =  (req, res) => {
     if (req.files) {
         console.log(req.files);
         let file = req.files.file;
-        let filename = file.name;
+        let filename = file.name + new Date().toISOString();
         console.log(filename);
-        file.mv('../uploads/' + filename, function (err) {
+        file.mv('./static/uploads/' + filename, function (err) {
             if (err) {
                 res.json(err)
 
             } else {
-                res.json({status: 'ok', data: 'Bild erfolgreich hochgeladen', path: ''});
+                res.json({status: 'ok', data: 'Bild erfolgreich hochgeladen', path: './uploads/' + filename});
             }
         })
     }

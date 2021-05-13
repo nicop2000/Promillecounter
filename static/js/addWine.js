@@ -15,7 +15,26 @@ function checkInput(color, kind, rating) {
     }
 }
 
+const uploadImageForm = document.getElementById('image-upload');
+uploadImageForm.addEventListener('submit', uploadImage);
+
+async function uploadImage(event) {
+    event.preventDefault()
+    console.log("clicked upload image");
+
+
+    let response = await fetch('/api/wine/uploadImage', {
+        method: 'POST',
+        body: new FormData(uploadImageForm)
+    });
+    let result = await response.json();
+    if(result.status === 'ok') {
+        picture = result.path;
+    }
+}
+
 async function addWineToList(event) {
+    console.log('PICTURE', picture)
     event.preventDefault()
     console.log("clicked");
     console.log(picture)
