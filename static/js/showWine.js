@@ -10,7 +10,7 @@ async function getWine() {
     if (result.status === 'ok') {
         const wines = result.data;
         console.log(wines)
-        for (let i = 0; i < wines.length; i += 2) {
+        for (let i = 0; i < wines.length; i += 3) {
             let divRow = document.createElement('div');
             divRow.className = "row";
             let divCol1 = document.createElement('div');
