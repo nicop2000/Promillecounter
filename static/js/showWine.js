@@ -41,7 +41,7 @@ async function getWine() {
             if (j < wines.length  && wines[j] !== null) {
                 let shopTemp = wines[j].shop;
                 let shop = shopTemp !== "" ? "Gekauft bei: " + shopTemp : "Kein Laden verfügbar";
-                let priceTemp = wines[i].price;
+                let priceTemp = wines[j].price;
                 let price = priceTemp !== "" ? priceTemp + " €" : "Kein Preis verfügbar";
                 let divCol2 = document.createElement('div');
                 divCol2.innerHTML = `
@@ -66,7 +66,7 @@ async function getWine() {
             if (k < wines.length && wines[k] !== null) {
                 let shopTemp = wines[k].shop;
                 let shop = shopTemp !== "" ? "Gekauft bei: " + shopTemp : "Kein Laden verfügbar";
-                let priceTemp = wines[i].price;
+                let priceTemp = wines[k].price;
                 let price = priceTemp !== "" ? priceTemp + " €" : "Kein Preis verfügbar";
                 let divCol3 = document.createElement('div');
                 divCol3.innerHTML = `
