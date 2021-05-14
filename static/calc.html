@@ -2,12 +2,13 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>Change Password</title>
+    <title>Promillerechner</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/navbar.css"/>
-    <link rel="stylesheet" href="./css/mainStyle.css">
+    <link rel="stylesheet" href="./css/mainStyle.css"/>
+    <link rel="stylesheet" href="./css/calc.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -40,20 +41,55 @@
 <body>
 <header></header>
 <div class="mainDiv">
-<h1>Change Password</h1>
-<form id="change-password">
-    <input type="password" autocomplete="off" autocapitalize="off" id="password-new" placeholder="Neues Passwort"/>
-    <input type="password" autocomplete="off" autocapitalize="off" id="password-new-repeat"
-           placeholder="Neues Passwort wiederholen"/>
-    <input type="submit" value="Submit Form"/>
-</form>
+
+    <form id="level-calc">
+        <label>Bitte Geschelcht auswählen</label>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="gender" value="male" id="male" required>
+            <label class="form-check-label" for="male">
+                männlich
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="gender" value="female" id="female" checked>
+            <label class="form-check-label" for="female">
+                weiblich
+            </label>
+        </div>
+        <label for="weight">Körpergewicht</label>
+        <input type="text" class="form-control" autocomplete="off" autocapitalize="off" id="weight"
+               placeholder="Gewicht in kg eingeben" required/>
+        <label for="starttime">Zeitpunkt des 1. alkoholischen Getränks</label>
+        <input type="time" class="form-control" autocomplete="off" autocapitalize="off" id="starttime"
+               placeholder="Zeit eingeben" required/>
+
+        <table id="data">
+            <th>Getränk</th>
+            <th>Anzahl</th>
+            <th>ml/Getränk</th>
+            <th>Alkohol in %</th>
+            <th>&permil; (ohne Abbau)</th>
+            <tr>
+                <td><input type="text" id="row-1-drink" class="short-own" placeholder="Getränk"/></td>
+                <td><input type="number" class="short-own" id="row-1-count" placeholder="Anzahl"/></td>
+                <td><input type="number" id="row-1-ml" class="short-own" placeholder="ml/Getränk"/></td>
+                <td><input type="number" id="row-1-alcohol" class="short-own" placeholder="Alkohol in %"/></td>
+                <td id="ergebnis-1"></td>
+            </tr>
+        </table>
+        <button type="submit" class="btn btn-success">Jetzt berechnen</button>
+    </form>
+    <p id="result-per-mill"></p>
+    <p>Alle Angaben sind Richtwerte und können völlig realittätsfern sein. <br/>Das kommt drauf an, wie der jeweilige
+        Mensch geschaffen ist, ob nebenbei Wasser getrunken wird, was vorher/währenddessen gegessen wird, etc.</p>
+    <p>Der Betrieber übernimmt keine Haftung :D</p>
 </div>
 
-<script src="js/navbar.js"></script>
+
+<script src="./js/navbar.js"></script>
+<script src="./js/calc.js"></script>
 <script>
-    document.getElementById("account").className = "nav-link active";
-    document.getElementById('change-password').reset();
+    document.getElementById("calc").className = "nav-link active";
 </script>
-<script src="js/changePassword.js"></script>
 </body>
 </html>

@@ -6,7 +6,6 @@ function verifyJWT(req, res, next) {
     console.log('Header: ', req.headers.cookie);
     if(req.headers.cookie === undefined) {
         res.redirect('/')
-
         // res.json({status: 'errorNoCookies'})
         return;
     }

@@ -13,7 +13,6 @@ function toggleMenu() {
 }
 
 
-
 let nav = document.createElement("nav");
 nav.className = "navbar navbar-dark bg-dark"
 nav.id = "mainNav"
@@ -49,12 +48,13 @@ home.className = "nav-item"
 // account.className = "nav-item"
 
 
-
-
 let about = document.createElement("li");
-about.innerHTML = '<a href="/about" id="about" class="nav-link"">Weiteres</a>';
+about.innerHTML = '<a href="/about" id="about" class="nav-link">Weiteres</a>';
 about.className = "nav-item"
 
+let calc = document.createElement("li");
+calc.innerHTML = '<a href="/calc" id="calc" class="nav-link">Promillerechner</a>';
+calc.className = "nav-item"
 
 let dropdown = document.createElement("li");
 dropdown.className = "nav-item dropdown-menu-left";
@@ -151,6 +151,7 @@ if (getCookie('loggedIn') === 'true') {
     dropDownMenuAccount.appendChild(register);
 }
 dropdown.appendChild(dropDownMenuAccount)
+ul.appendChild(calc);
 ul.appendChild(about);
 nav.appendChild(ul);
 let header = document.getElementsByTagName("header")[0];
@@ -174,5 +175,8 @@ function getCookie(cname) {
     }
     return "";
 }
-document.cookie = "myToken=loggedOut";
-document.cookie = "loggedIn=false"
+
+if (document.cookie === "") {
+    document.cookie = "myToken=loggedOut";
+    document.cookie = "loggedIn=false"
+}

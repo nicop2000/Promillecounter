@@ -40,85 +40,90 @@
 </head>
 <body>
 <header></header>
-<div id="headlines">
-    <h2>Wein hinzufügen</h2>
-</div>
-<div class="row">
-    <div class="col-sm-8">
-        <form id="image-upload" enctype="multipart/form-data">
-            <label for="picture">Bild hinzufügen</label> <br/>
-            <input type="file" name="file" id="picture">
-        <button id="clear-image-upload" class="btn btn-warning" onclick="clearImageUpload()">Bild entfernen</button>
-        </form>
-        <form id="add-wine-form">
-            <div class="form-group">
-                <label for="wine-name">Name des Weines</label>
-                <input type="text" class="form-control" id="wine-name" placeholder="Name auf dem Ettiket" required>
-
-                <label for="wine-color">Farbe des Weines</label>
-                <select class="form-control form-control-sm" id="wine-color" required>
-                    <option value="non">Bitte auswählen...</option>
-                    <option value="Weißwein">Weißwein</option>
-                    <option value="Rosé">Roséwein</option>
-                    <option value="Rotwein">Rotwein</option>
-                    <option value="Sekt">Sekt</option>
-                </select>
-                <label for="wine-kind">Geschmack</label>
-                <select class="form-control form-control-sm" id="wine-kind" required>
-                    <option value="non">Bitte auswählen...</option>
-                    <option value="lieblich">lieblich</option>
-                    <option value="halbtrocken/feinherb">halbtrocken/feinherb</option>
-                    <option value="trocken">trocken</option>
-                </select>
-                <label for="wine-price">für ... €</label>
-                <input type="text" class="form-control" id="wine-price" placeholder="Preis in €">
-                <label for="wine-shop">bei ... gekauft</label>
-                <input type="text" class="form-control" id="wine-shop" placeholder="Name des Ladens">
-
-                <p>Bewertung</p>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="wineRating" id="rating-1" value="&#x2B50;"
-                           required>
-                    <label class="form-check-label" for="rating-1">&#x2B50;</label>
-                </div>
-
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="wineRating" id="rating-2"
-                           value="&#x2B50;&#x2B50;" required>
-                    <label class="form-check-label" for="rating-2">&#x2B50;&#x2B50;</label>
-                </div>
-
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="wineRating" id="rating-3"
-                           value="&#x2B50;&#x2B50;&#x2B50;" required>
-                    <label class="form-check-label" for="rating-3">&#x2B50;&#x2B50;&#x2B50;</label>
-                </div>
-
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="wineRating" id="rating-4"
-                           value="&#x2B50;&#x2B50;&#x2B50;&#x2B50;" required>
-                    <label class="form-check-label" for="rating-4">&#x2B50;&#x2B50;&#x2B50;&#x2B50;</label>
-                </div>
-
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="wineRating" id="rating-5"
-                           value="&#x2B50;&#x2B50;&#x2B50;&#x2B50;&#x2B50;" required>
-                    <label class="form-check-label" for="rating-5">&#x2B50;&#x2B50;&#x2B50;&#x2B50;&#x2B50;</label>
-                </div>
-
-            </div>
-        <button type="submit" class="btn btn-success" value="Submit Form">Wein zu meiner Liste hinzufügen</button>
-        </form>
-        <label id="error-adding-wine"></label>
+<div class="mainDiv">
+    <div id="headlines">
+        <h2>Wein hinzufügen</h2>
     </div>
+    <div class="row">
+        <div class="col-sm-8">
+            <form id="image-upload" enctype="multipart/form-data">
+                <label for="picture">Bild hinzufügen</label> <br/>
+                <input type="file" name="file" id="picture">
+                <button id="clear-image-upload" class="btn btn-warning" onclick="clearImageUpload()">Bild entfernen
+                </button>
+            </form>
+            <form id="add-wine-form">
+                <div class="form-group">
+                    <label for="wine-name">Name des Weines</label>
+                    <input type="text" class="form-control" id="wine-name" placeholder="Name auf dem Ettiket" required>
+
+                    <label for="wine-color">Farbe des Weines</label>
+                    <select class="form-control form-control-sm" id="wine-color" required>
+                        <option value="non">Bitte auswählen...</option>
+                        <option value="Weißwein">Weißwein</option>
+                        <option value="Rosé">Roséwein</option>
+                        <option value="Rotwein">Rotwein</option>
+                        <option value="Sekt">Sekt</option>
+                    </select>
+                    <label for="wine-kind">Geschmack</label>
+                    <select class="form-control form-control-sm" id="wine-kind" required>
+                        <option value="non">Bitte auswählen...</option>
+                        <option value="lieblich">lieblich</option>
+                        <option value="halbtrocken/feinherb">halbtrocken/feinherb</option>
+                        <option value="trocken">trocken</option>
+                    </select>
+                    <label for="wine-price">für ... €</label>
+                    <input type="text" class="form-control" id="wine-price" placeholder="Preis in €">
+                    <label for="wine-shop">bei ... gekauft</label>
+                    <input type="text" class="form-control" id="wine-shop" placeholder="Name des Ladens">
+
+                    <p>Bewertung</p>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="wineRating" id="rating-1" value="&#x2B50;"
+                               required>
+                        <label class="form-check-label" for="rating-1">&#x2B50;</label>
+                    </div>
+
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="wineRating" id="rating-2"
+                               value="&#x2B50;&#x2B50;" required>
+                        <label class="form-check-label" for="rating-2">&#x2B50;&#x2B50;</label>
+                    </div>
+
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="wineRating" id="rating-3"
+                               value="&#x2B50;&#x2B50;&#x2B50;" required>
+                        <label class="form-check-label" for="rating-3">&#x2B50;&#x2B50;&#x2B50;</label>
+                    </div>
+
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="wineRating" id="rating-4"
+                               value="&#x2B50;&#x2B50;&#x2B50;&#x2B50;" required>
+                        <label class="form-check-label" for="rating-4">&#x2B50;&#x2B50;&#x2B50;&#x2B50;</label>
+                    </div>
+
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="wineRating" id="rating-5"
+                               value="&#x2B50;&#x2B50;&#x2B50;&#x2B50;&#x2B50;" required>
+                        <label class="form-check-label" for="rating-5">&#x2B50;&#x2B50;&#x2B50;&#x2B50;&#x2B50;</label>
+                    </div>
+
+                </div>
+                <button type="submit" class="btn btn-success" value="Submit Form">Wein zu meiner Liste hinzufügen
+                </button>
+            </form>
+            <label id="error-adding-wine"></label>
+        </div>
 
 
+    </div>
 </div>
-</div>
+
 
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -132,7 +137,9 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-dark" onclick="reToHome()">Zur Startseite</button>
-                <button type="button" class="btn btn-success" data-dismiss="modal" onclick="reToWines()">Alle Weine anzeigen</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal" onclick="reToWines()">Alle Weine
+                    anzeigen
+                </button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">OK, schließen</button>
             </div>
         </div>

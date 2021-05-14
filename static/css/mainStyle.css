@@ -7,6 +7,10 @@ body {
     background-color: rgba(148, 202, 170, 0.8);
 }
 
+.mainDiv {
+    padding: 1rem;
+}
+
 h2 {
     font-family: Atkinson;
     font-weight: bold;

@@ -21,8 +21,9 @@ async function loginUser(event) {
 
     if(result.status === 'ok') {
         document.getElementById('login-form').reset();
-        location.href = '/'
+
         alert('eingeloggt')
+        location.href = '/'
         //everything went fine
     } else {
         //error creatin user

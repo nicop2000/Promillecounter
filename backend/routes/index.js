@@ -9,8 +9,7 @@ router.use('/api/user', user);
 router.use('/api/wine', wine);
 
 
-
-router.get('/',  (req, res, next) => {
+router.get('/', (req, res, next) => {
     res.sendFile(path.join(__dirname + "/../../static/index.html"));
 });
 
@@ -32,7 +31,7 @@ router.get('/register', (req, res, next) => {
 router.get('/about', (req, res, next) => {
     res.sendFile(path.join(__dirname + "/../../static/about.html"));
 })
-router.get('/account',[auth.verifyJWT], (req, res, next) => {
+router.get('/account', [auth.verifyJWT], (req, res, next) => {
     res.sendFile(path.join(__dirname + "/../../static/account.html"));
 })
 router.get('/add-wine', [auth.verifyJWT], (req, res, next) => {
@@ -42,11 +41,15 @@ router.get('/show-wine', [auth.verifyJWT], (req, res, next) => {
     res.sendFile(path.join(__dirname + "/../../static/show-wine.html"));
 })
 
-router.get('/imprint',  (req, res, next) => {
+router.get('/imprint', (req, res, next) => {
     res.sendFile(path.join(__dirname + "/../../static/imprint.html"));
 })
 
-router.get('*',  (req, res, next) => {
+router.get('/calc', (req, res, next) => {
+    res.sendFile(path.join(__dirname + "/../../static/calc.html"));
+})
+
+router.get('*', (req, res, next) => {
     res.redirect('/')
 });
 

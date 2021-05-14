@@ -1,0 +1,20 @@
+#result-per-mill {
+    padding-top: 1rem;
+}
+
+table tr input {
+    width: 8rem;
+    font-size: 11px;
+}
+
+table th {
+    font-size: 11px;
+}
+
+.short-own {
+    width: 5rem !important;
+}
+
+.btn-success {
+    margin-top: 1rem;
+}
