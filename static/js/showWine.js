@@ -6,18 +6,23 @@ async function getWine() {
         },
         body: JSON.stringify({})
     }).then(res => res.json())
+    if (result.status === 'errorNoCookies') {
+        location.href = "/home"
+        alert("Es ist ein Fehler im Zusammenhang mit Cookies aufgetreten. Hast du sie vielleicht deaktiviert?")
+        return;
+    }
 
     if (result.status === 'ok') {
         const wines = result.data;
         console.log(wines)
-        if(wines.length === 0) {
+        if (wines.length === 0) {
             console.log('LEEEER')
         }
         for (let i = 0; i < wines.length; i += 3) {
             let divRow = document.createElement('div');
             divRow.className = "row";
             let divCol1 = document.createElement('div');
-            if(wines[i] != null) {
+            if (wines[i] != null) {
                 let shopTemp = wines[i].shop;
                 let shop = shopTemp !== "" ? "Gekauft bei: " + shopTemp : "Kein Laden verfügbar";
                 let priceTemp = wines[i].price;
@@ -42,7 +47,7 @@ async function getWine() {
                 divCol1.className = "col";
             }
             let j = i + 1;
-            if (j < wines.length  && wines[j] !== null) {
+            if (j < wines.length && wines[j] !== null) {
                 let shopTemp = wines[j].shop;
                 let shop = shopTemp !== "" ? "Gekauft bei: " + shopTemp : "Kein Laden verfügbar";
                 let priceTemp = wines[j].price;
@@ -142,7 +147,13 @@ async function sendDeleteRequest(wineToDelete) {
         body: JSON.stringify({wineToDelete})
     }).then(res => res.json())
 
-    if(result.status === 'ok') {
+    if (result.status === 'errorNoCookies') {
+        location.href = "/home"
+        alert("Es ist ein Fehler im Zusammenhang mit Cookies aufgetreten. Hast du sie vielleicht deaktiviert?")
+        return;
+    }
+
+    if (result.status === 'ok') {
         document.getElementById('wine-confirmation').innerHTML += `<p>Der Wein ${result.wine} wurde erfolgreich gelöscht</p>`;
         $('#exampleModal').modal()
     }

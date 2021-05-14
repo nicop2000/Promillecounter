@@ -20,7 +20,6 @@ router.get('/home', (req, res, next) => {
 
 
 router.get('/cp', [auth.verifyJWT], (req, res, next) => {
-
     res.sendFile(path.join(__dirname + "/../../static/change-password.html"));
 })
 

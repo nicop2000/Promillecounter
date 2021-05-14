@@ -18,6 +18,10 @@ const addWine = async (req, res) => {
     const {wine: newWine} = req.body;
     console.log
     console.log(req.body)
+    if(req.headers.cookie === undefined) {
+        res.json({status: 'errorNoCookies'})
+        return;
+    }
     const tokenTempAll = req.headers.cookie.split('=')
     let tokenTemp = []
     let token = ""
@@ -77,6 +81,10 @@ const addWine = async (req, res) => {
 
 const showWine = async (req, res) => {
     console.log("AngekommenShow")
+    if(req.headers.cookie === undefined) {
+        res.json({status: 'errorNoCookies'})
+        return;
+    }
 
     const tokenTempAll = req.headers.cookie.split('=')
     let tokenTemp = []
@@ -147,6 +155,10 @@ const deleteWine = async (req, res) => {
     const {wineToDelete} = req.body;
     console.log
     console.log(req.body)
+    if(req.headers.cookie === undefined) {
+        res.json({status: 'errorNoCookies'})
+        return;
+    }
     const tokenTempAll = req.headers.cookie.split('=')
     let tokenTemp = []
     let token = ""

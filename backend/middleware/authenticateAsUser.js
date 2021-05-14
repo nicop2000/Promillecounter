@@ -4,6 +4,12 @@ let jwt = require('jsonwebtoken');
 function verifyJWT(req, res, next) {
     console.log("JWT-AUTH\n\n\n")
     console.log('Header: ', req.headers.cookie);
+    if(req.headers.cookie === undefined) {
+        res.redirect('/')
+
+        // res.json({status: 'errorNoCookies'})
+        return;
+    }
     const tokenTempAll = req.headers.cookie.split('=')
     let tokenTemp = []
     let token = ""

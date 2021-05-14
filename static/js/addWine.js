@@ -77,6 +77,12 @@ async function addWineToList(event) {
         })
     }).then(res => res.json())
 
+    if(result.status ==='errorNoCookies') {
+        location.href="/home"
+        alert("Es ist ein Fehler im Zusammenhang mit Cookies aufgetreten. Hast du sie vielleicht deaktiviert?")
+        return;
+    }
+
     if (result.status === 'ok') {
         console.log('Updated', result.data);
         document.getElementById('add-wine-form').reset();
