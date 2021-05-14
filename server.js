@@ -6,7 +6,7 @@ const cors = require('cors');
 require('dotenv').config()
 const upload = require('express-fileupload')
 const https = require('https');
-const http = require('https');
+const http = require('http');
 const app = express();
 const fs = require("fs");
 
