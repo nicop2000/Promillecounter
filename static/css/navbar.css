@@ -11,6 +11,12 @@
 
 }
 
+#floating-copyright {
+    margin: 1rem;
+    font-size: 9px;
+    font-style: italic;
+}
+
 .nav-link.active {
     color: rgb(148, 202, 170) !important;
 

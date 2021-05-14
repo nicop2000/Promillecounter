@@ -128,7 +128,10 @@ showWine.innerHTML = "Weine anzeigen"
 dropdownWine.append(ddToggleWine)
 
 
-
+let floatingCopyright = document.createElement('footer');
+floatingCopyright.id = "floating-copyright"
+floatingCopyright.innerHTML = "&copy; by Nico Petersen"
+document.body.insertBefore(floatingCopyright, null);
 let dropdownMenuWine = document.createElement('div');
 dropdownMenuWine.className = "dropdown-menu bg-dark";
 dropdownMenuWine.setAttribute("aria-labelledby", "navbarDropdownMenuLink");
