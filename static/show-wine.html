@@ -37,7 +37,30 @@
 <header></header>
 
 <div id="main-container-wines" class="container">
-    
+
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Wein gelöscht</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="wine-confirmation">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-dark" onclick="reToHome()">Zur Startseite</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="reloadWines()">OK, schließen und zurück zur Übersicht</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 
@@ -47,7 +70,7 @@
 
 <script src="./js/navbar.js"></script>
 <script>
-    //document.getElementById("register").className = "nav-link active";
-    //document.getElementById("accountDD").className = "nav-link dropdown-toggle active"</script>
+    document.getElementById("show-wine").className = "nav-link active";
+    document.getElementById("wineDD").className = "nav-link dropdown-toggle active";</script>
 </body>
 </html>

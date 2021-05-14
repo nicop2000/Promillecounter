@@ -23,7 +23,8 @@ table img {
     border-bottom: 0px solid white;
 }
 
-.row {
-
-
+.error {
+    display: flex;
+    justify-content: center;
+    padding-top: 1rem;
 }

@@ -67,7 +67,7 @@ const addWine = async (req, res) => {
                 }
             )
         }
-        res.json({status: 'ok', data: 'Änderung erfolgreich'});
+        res.json({status: 'ok', data: 'Änderung erfolgreich', wine: newWine});
     } catch (error) {
         console.log('ERRRROOOORRRR', error);
         //alert('Etwas ist schiefgelaufen. Bitte logge dich aus und wieder ein')
@@ -112,13 +112,13 @@ const showWine = async (req, res) => {
 
             res.json({status: 'ok', data: list.wine});
         } else {
-
+            return res.json({status: 'okBut', data: 'none', error: 'Noch keine Weine vorhanden'})
         }
 
     } catch (error) {
         console.log('ERRRROOOORRRR', error);
         //alert('Etwas ist schiefgelaufen. Bitte logge dich aus und wieder ein')
-        return res.json({status: 'error', data: 'none', error: 'Noch keine Weine vorhanden'})
+        return res.json({status: 'error', error: error})
     }
 }
 
@@ -137,7 +137,72 @@ const uploadImage =  (req, res) => {
                 res.json({status: 'ok', data: 'Bild erfolgreich hochgeladen', path: './uploads/' + filename});
             }
         })
+    } else {
+        res.json({status: 'ok', data: 'Kein Bild hochgeladen, da keins angehängt wurde'});
+
     }
 }
 
-module.exports = {addWine, showWine, uploadImage}
+const deleteWine = async (req, res) => {
+    const {wineToDelete} = req.body;
+    console.log
+    console.log(req.body)
+    const tokenTempAll = req.headers.cookie.split('=')
+    let tokenTemp = []
+    let token = ""
+    tokenTempAll.forEach(element => {
+        let temp = element.split(';')
+        temp.forEach(element => {
+            tokenTemp.push(element)
+        })
+    })
+    console.log(tokenTemp)
+    for (let i = 0; i < tokenTemp.length; i++) {
+        console.log('aktuelles i', tokenTemp[i])
+        if (tokenTemp[i].trim() === 'myToken') {
+            console.log('FOUND')
+            console.log(tokenTemp[i])
+            console.log(tokenTemp[i + 1])
+            token = tokenTemp[i + 1];
+            break;
+        }
+    }
+    console.log('TOKEN', token)
+
+    try {
+        const user = jwt.verify(token, process.env.JWT_SECRET)
+        const userId = user.id; //token holen
+        console.log(userId);
+        console.log(userId, wineToDelete);
+        const list = await Wine.findOne({userId}).lean();
+
+            let wine = list.wine;
+            console.log(wine)
+            let wineName = '';
+            wine.forEach(function(item, index, object) {
+                if(item._id == wineToDelete) {
+                    wineName = item.name;
+                    console.log('FOUND')
+                    object.splice(index, 1);
+                }
+            })
+            console.log(wine)
+            //
+            // console.log('\n\n\n')
+            // console.log(list)
+            await Wine.updateOne(
+                {userId},
+                {
+                    $set: {wine}
+                }
+            )
+
+        res.json({status: 'ok', data: 'Wein erfolgreich gelöscht', wine: wineName});
+    } catch (error) {
+        console.log('ERRRROOOORRRR', error);
+        //alert('Etwas ist schiefgelaufen. Bitte logge dich aus und wieder ein')
+        return res.json({status: 'error', error: 'Token ungültig'})
+    }
+}
+
+module.exports = {addWine, showWine, uploadImage, deleteWine}

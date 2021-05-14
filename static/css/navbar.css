@@ -7,8 +7,13 @@
     background-color: white;
 }
 
-.overrideMenu {
-    background-color: transparent !important;
+.dropdown-menu.bg-info.show {
+
+}
+
+.nav-link.active {
+    color: rgb(148, 202, 170) !important;
+
 }
 
 .navButton {

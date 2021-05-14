@@ -43,6 +43,10 @@ router.get('/show-wine', [auth.verifyJWT], (req, res, next) => {
     res.sendFile(path.join(__dirname + "/../../static/show-wine.html"));
 })
 
+router.get('/imprint',  (req, res, next) => {
+    res.sendFile(path.join(__dirname + "/../../static/imprint.html"));
+})
+
 router.get('*',  (req, res, next) => {
     res.redirect('/')
 });

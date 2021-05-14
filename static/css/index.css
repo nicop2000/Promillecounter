@@ -1,0 +1,29 @@
+body {
+    background-color: rgba(148, 202, 170, 0.8);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+}
+
+#todo {
+list-style: none;
+}
+
+#todo-in-todo, #important-links {
+    list-style: none;
+}
+
+#todo>li, #important-links>li {
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+}
+
+#todo-in-todo>li {
+    padding-bottom: 0.5rem;
+    padding-top: 0.5rem;
+}
+
+h5 {
+    text-decoration: underline;
+}
+

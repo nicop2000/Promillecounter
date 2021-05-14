@@ -1,3 +1,33 @@
 .col-sm-8, .col-sm-4 {
-    padding: 1.25rem;
+
+}
+
+#image-upload {
+    margin-top: 1rem;
+}
+
+.btn-info {
+    margin-top: 0.25rem;
+}
+
+form .btn-success {
+    margin-left: -5px;
+    margin-top: 0.25rem;
+}
+
+label {
+    margin-bottom: 0.2rem;
+}
+
+p {
+    margin-bottom: 0rem;
+}
+
+input, select {
+    margin-bottom: 0.5rem;
+}
+
+.row {
+    margin-left: 0px;
+    margin-right: 0px;
 }

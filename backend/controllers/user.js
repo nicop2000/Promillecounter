@@ -11,7 +11,7 @@ mongoose.connect('mongodb://localhost:27017/data', {
 })
 
 const register = async (req, res) => {
-    const {username, password: plainTextPassword} = req.body;
+    const {firstName, lastName, username, emailAddress, password: plainTextPassword, created} = req.body;
 
     if (!username || typeof username !== 'string') {
         return res.json({status: 'error', error: 'Username nicht gültig'})
@@ -21,12 +21,17 @@ const register = async (req, res) => {
     }
     //TODO: plainTextPasswordcheck with RegEx
 
+    console.log('start hash')
     const password = await bcrypt.hash(plainTextPassword, 10);
 
     try {
         const response = await User.create({
+            firstName,
+            lastName,
             username,
-            password
+            emailAddress,
+            password,
+            created
         })
         console.log(response)
             const token = jwt.sign({id: response._id, username: response.username}, process.env.JWT_SECRET, {expiresIn: '12h'})

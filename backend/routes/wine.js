@@ -18,6 +18,7 @@ console.log("routes/wine")
 router.post('/addWine', wine.addWine);
 router.post('/showWine', wine.showWine);
 router.post('/uploadImage', wine.uploadImage);
+router.post('/deleteWine', wine.deleteWine);
 
 
 module.exports = router;

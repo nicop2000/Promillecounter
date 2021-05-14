@@ -1,0 +1,13 @@
+h2 {
+    font-family: Atkinson;
+    font-weight: normal;
+}
+
+h1 {
+    font-family: Atkinson;
+    font-weight: bold;
+}
+
+article {
+    padding: 1rem;
+}

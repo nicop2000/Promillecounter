@@ -74,7 +74,7 @@ console.log(dropdown)
 
 
 let dropDownMenuAccount = document.createElement('div');
-dropDownMenuAccount.className = "dropdown-menu bg-info";
+dropDownMenuAccount.className = "dropdown-menu bg-dark";
 dropDownMenuAccount.setAttribute("aria-labelledby", "navbarDropdownMenuLink");
 
 let login = document.createElement('a');
@@ -130,7 +130,7 @@ dropdownWine.append(ddToggleWine)
 
 
 let dropdownMenuWine = document.createElement('div');
-dropdownMenuWine.className = "dropdown-menu bg-info";
+dropdownMenuWine.className = "dropdown-menu bg-dark";
 dropdownMenuWine.setAttribute("aria-labelledby", "navbarDropdownMenuLink");
 
 ul.appendChild(home);

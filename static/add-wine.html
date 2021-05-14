@@ -45,6 +45,11 @@
 </div>
 <div class="row">
     <div class="col-sm-8">
+        <form id="image-upload" enctype="multipart/form-data">
+            <label for="picture">Bild hinzufügen</label> <br/>
+            <input type="file" name="file" id="picture">
+        <button id="clear-image-upload" class="btn btn-warning" onclick="clearImageUpload()">Bild entfernen</button>
+        </form>
         <form id="add-wine-form">
             <div class="form-group">
                 <label for="wine-name">Name des Weines</label>
@@ -62,9 +67,8 @@
                 <select class="form-control form-control-sm" id="wine-kind" required>
                     <option value="non">Bitte auswählen...</option>
                     <option value="lieblich">lieblich</option>
-                    <option value="halbtrocken">halbtrocken</option>
-                    <option value="feinherb">feinherb</option>
-                    <option value="süß">süß</option>
+                    <option value="halbtrocken/feinherb">halbtrocken/feinherb</option>
+                    <option value="trocken">trocken</option>
                 </select>
                 <label for="wine-price">für ... €</label>
                 <input type="text" class="form-control" id="wine-price" placeholder="Preis in €">
@@ -103,24 +107,37 @@
                 </div>
 
             </div>
-            <button type="submit" class="btn btn-info" value="Submit Form">Wein zu meiner Liste hinzufügen</button>
+        <button type="submit" class="btn btn-success" value="Submit Form">Wein zu meiner Liste hinzufügen</button>
         </form>
         <label id="error-adding-wine"></label>
     </div>
 
-    <div class="col-sm-4">
 
-        <form id="image-upload" enctype="multipart/form-data">
-            <input type="file" name="file" id="picture">
-            <button type="submit" value="upload">Bild hochladen</button>
-        </form>
+</div>
+</div>
 
 
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Wein hinzugefügt</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="wine-confirmation">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-dark" onclick="reToHome()">Zur Startseite</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal" onclick="reToWines()">Alle Weine anzeigen</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">OK, schließen</button>
+            </div>
+        </div>
     </div>
 </div>
-</div>
-<main id="test"></main>
-
 
 <script src="./js/addWine.js"></script>
 <script src="./js/navbar.js"></script>

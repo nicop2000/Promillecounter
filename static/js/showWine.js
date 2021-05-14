@@ -10,6 +10,9 @@ async function getWine() {
     if (result.status === 'ok') {
         const wines = result.data;
         console.log(wines)
+        if(wines.length === 0) {
+            console.log('LEEEER')
+        }
         for (let i = 0; i < wines.length; i += 3) {
             let divRow = document.createElement('div');
             divRow.className = "row";
@@ -28,6 +31,7 @@ async function getWine() {
                 <tr><td>${wines[i].rating}</td></tr>
                 <tr><td>${shop}</td></tr>
                 <tr><td><img src="${wines[i].picture}" alt="Kein Bild verfügbar"></td></tr>
+                <tr><td><button type="button" class="btn btn-danger" onclick="deleteWine('${wines[i]._id}')">Wein löschen</button></td></tr>
             </table>`;
                 divCol1.className = "col";
                 divRow.appendChild(divCol1);
@@ -53,6 +57,7 @@ async function getWine() {
                 <tr><td>${wines[j].rating}</td></tr>
                 <tr><td>${shop}</td></tr>
                 <tr><td><img src="${wines[j].picture}" alt="Kein Bild verfügbar"></td></tr>
+                <tr><td><button type="button" class="btn btn-danger" onclick="deleteWine('${wines[j]._id}')">Wein löschen</button></td></tr>
             </table>`;
                 divRow.appendChild(divCol2);
                 divCol2.className = "col";
@@ -78,6 +83,7 @@ async function getWine() {
                 <tr><td>${wines[k].rating}</td></tr>
                 <tr><td>${shop}</td></tr>
                 <tr><td><img src="${wines[k].picture}" alt="Kein Bild verfügbar"></td></tr>
+                <tr><td><button type="button" class="btn btn-danger" onclick="deleteWine('${wines[k]._id}')">Wein löschen</button></td></tr>
             </table>`;
                 divRow.appendChild(divCol3);
                 divCol3.className = "col";
@@ -101,12 +107,51 @@ async function getWine() {
 
 
     } else if (result.data === 'none') {
-        let errH1 = document.createElement('h1');
-        errH1.innerHTML = result.error;
-        document.body.appendChild(errH1)
+        let errH2 = document.createElement('h2');
+        errH2.innerHTML = result.error;
+        errH2.className = "error";
+        let link = document.createElement('a');
+        link.href = "/add-wine";
+        link.innerText = 'Jetzt Wein hinzufügen'
+        link.className = "error"
+        document.body.appendChild(errH2)
+        document.body.appendChild(link)
 
 
     } else {
         alert(result.error);
     }
+}
+
+function deleteWine(wineToDelete) {
+    if (confirm('Diesen Wein wirklich löschen?')) {
+        // delete confirmed
+        sendDeleteRequest(wineToDelete);
+    } else {
+        // Do nothing!
+    }
+
+}
+
+async function sendDeleteRequest(wineToDelete) {
+    const result = await fetch('/api/wine/deleteWine', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({wineToDelete})
+    }).then(res => res.json())
+
+    if(result.status === 'ok') {
+        document.getElementById('wine-confirmation').innerHTML += `<p>Der Wein ${result.wine} wurde erfolgreich gelöscht</p>`;
+        $('#exampleModal').modal()
+    }
+}
+
+function reloadWines() {
+    window.location.reload()
+}
+
+function reToHome() {
+    location.href = '/home'
 }

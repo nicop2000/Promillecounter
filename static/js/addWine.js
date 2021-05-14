@@ -2,6 +2,10 @@ const form = document.getElementById('add-wine-form');
 form.addEventListener('submit', addWineToList);
 let picture = ""
 
+function clearImageUpload() {
+    document.getElementById('clear-image-upload').reset();
+}
+
 function checkInput(color, kind, rating) {
 
     if (!color || color === 'non') {
@@ -22,20 +26,20 @@ async function uploadImage(event) {
     event.preventDefault()
     console.log("clicked upload image");
 
-
-    let response = await fetch('/api/wine/uploadImage', {
-        method: 'POST',
-        body: new FormData(uploadImageForm)
-    });
-    let result = await response.json();
-    if(result.status === 'ok') {
-        picture = result.path;
-    }
 }
 
 async function addWineToList(event) {
-    console.log('PICTURE', picture)
     event.preventDefault()
+    let responseImage = await fetch('/api/wine/uploadImage', {
+        method: 'POST',
+        body: new FormData(uploadImageForm)
+    });
+    let resultImage = await responseImage.json();
+    if(resultImage.status === 'ok') {
+        picture = resultImage.path;
+    }
+    console.log('PICTURE', picture)
+
     console.log("clicked");
     console.log(picture)
     const name = $('#wine-name').val()
@@ -76,6 +80,9 @@ async function addWineToList(event) {
     if (result.status === 'ok') {
         console.log('Updated', result.data);
         document.getElementById('add-wine-form').reset();
+        document.getElementById('image-upload').reset();
+        document.getElementById('wine-confirmation').innerHTML += `<p>Der Wein ${result.wine.name} wurde erfolgreich hinzugefügt</p>`;
+        $('#exampleModal').modal()
 
         alert('...')
         //everything went fine
@@ -86,14 +93,10 @@ async function addWineToList(event) {
 
 }
 
+function reToWines() {
+    location.href = '/show-wine'
+}
 
-// Select the image
-const img = document.querySelector('#my-image');
-img.addEventListener('load', function (event) {
-    const image = event.currentTarget;
-    /*
-upload image and save to server with datapath!!!!!
- */
-});
-
-// Auf neue Auswahl reagieren und gegebenenfalls Funktion dateiauswahl neu ausführen.
+function reToHome() {
+    location.href = '/home'
+}
