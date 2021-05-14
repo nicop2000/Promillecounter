@@ -8,6 +8,7 @@ const upload = require('express-fileupload')
 const https = require('https');
 const http = require('https');
 const app = express();
+const fs = require("fs");
 
 const PORT = process.env.PORT || 5000;
 
@@ -31,9 +32,11 @@ http.createServer(function (req, res) {
 }).listen(80);
 } else
 if (process.env.NODE_ENV === "development") {
-    app.listen(9000);
+    app.listen(PORT);
+    console.log('Dev: Server up at ', PORT);
 } else {
-    app.listen(9000);
+    app.listen(PORT);
+    console.log('Else: Server up at ', PORT);
 }
 
 
@@ -45,9 +48,9 @@ app.use('/resources', express.static(__dirname + '/backend/helpers'));
 app.use('/', router);
 app.use(cors());
 
-app.listen(PORT, () => {
-    console.log('Server up at ', PORT);
-});
+// app.listen(PORT, () => {
+//     console.log('Server up at ', PORT);
+// });
 
 
 
