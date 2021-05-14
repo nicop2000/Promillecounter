@@ -174,3 +174,5 @@ function getCookie(cname) {
     }
     return "";
 }
+document.cookie = "myToken=loggedOut";
+document.cookie = "loggedIn=false"
