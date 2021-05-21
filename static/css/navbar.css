@@ -30,6 +30,11 @@ nav ul li div a {
     color: #0d6efd !important;
 }
 
+.dropdown-menu {
+    background-color: #414549 !important;
+    margin-left: 1rem;
+}
+
 .active {
     color:white !important;
 }

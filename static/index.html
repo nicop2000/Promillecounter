@@ -67,6 +67,11 @@
 
 
 <script src="js/navbar.js"></script>
-<script>document.getElementById("home").className ="nav-link active"</script>
+<script>
+    let x = navigator.userAgent;
+    if(x.includes('Ecosia')) {
+        alert('Bitte nutz nicht Ecosia. Dann geht das wieder alles in die Hose :D');
+    }
+    document.getElementById("home").className ="nav-link active"</script>
 </body>
 </html>

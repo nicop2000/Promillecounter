@@ -1,7 +1,8 @@
 const Wine = require('../model/wine');
-const auth = require('../middleware/authenticateAsUser')
-const jwt = require('jsonwebtoken')
-const upload = require('express-fileupload')
+const auth = require('../middleware/authenticateAsUser');
+const jwt = require('jsonwebtoken');
+const upload = require('express-fileupload');
+const fs = require('fs');
 
 const mongoose = require('mongoose');
 require('dotenv').config()
@@ -18,7 +19,7 @@ const addWine = async (req, res) => {
     const {wine: newWine} = req.body;
     console.log
     console.log(req.body)
-    if(req.headers.cookie === undefined) {
+    if (req.headers.cookie === undefined) {
         res.json({status: 'errorNoCookies'})
         return;
     }
@@ -53,6 +54,7 @@ const addWine = async (req, res) => {
         console.log(list, 'GEFUNDENER WEIN LIST')
         if (!list) {
             console.log('NEW LIST')
+            console.log(newWine)
             const respone = await Wine.create({
                 userId,
                 wine: newWine
@@ -75,13 +77,13 @@ const addWine = async (req, res) => {
     } catch (error) {
         console.log('ERRRROOOORRRR', error);
         //alert('Etwas ist schiefgelaufen. Bitte logge dich aus und wieder ein')
-        return res.json({status: 'error', error: 'Token ungültig'})
+        return res.json({status: 'error', error: JSON.stringify(error)})
     }
 }
 
 const showWine = async (req, res) => {
     console.log("AngekommenShow")
-    if(req.headers.cookie === undefined) {
+    if (req.headers.cookie === undefined) {
         res.json({status: 'errorNoCookies'})
         return;
     }
@@ -99,6 +101,7 @@ const showWine = async (req, res) => {
     for (let i = 0; i < tokenTemp.length; i++) {
         console.log('aktuelles i', i)
         if (tokenTemp[i].trim() === 'myToken') {
+
             console.log('FOUND')
             console.log(tokenTemp[i])
             console.log(tokenTemp[i + 1])
@@ -108,7 +111,7 @@ const showWine = async (req, res) => {
     }
     console.log('TOKEN', token)
 
-    try{
+    try {
         const user = jwt.verify(token, process.env.JWT_SECRET)
         console.log('verified show wine')
         const userId = user.id; //token holen
@@ -130,7 +133,7 @@ const showWine = async (req, res) => {
     }
 }
 
-const uploadImage =  (req, res) => {
+const uploadImage = (req, res) => {
     console.log('Angekommen uploadImage')
     if (req.files) {
         console.log(req.files);
@@ -152,10 +155,10 @@ const uploadImage =  (req, res) => {
 }
 
 const deleteWine = async (req, res) => {
-    const {wineToDelete} = req.body;
-    console.log
+    const {wineToDeleteID, wineToDeletePicture} = req.body;
+    console.log('WINE TO DELETE IDS', wineToDeletePicture)
     console.log(req.body)
-    if(req.headers.cookie === undefined) {
+    if (req.headers.cookie === undefined) {
         res.json({status: 'errorNoCookies'})
         return;
     }
@@ -185,29 +188,41 @@ const deleteWine = async (req, res) => {
         const user = jwt.verify(token, process.env.JWT_SECRET)
         const userId = user.id; //token holen
         console.log(userId);
-        console.log(userId, wineToDelete);
+        console.log(userId, wineToDeleteID);
         const list = await Wine.findOne({userId}).lean();
 
-            let wine = list.wine;
-            console.log(wine)
-            let wineName = '';
-            wine.forEach(function(item, index, object) {
-                if(item._id == wineToDelete) {
-                    wineName = item.name;
-                    console.log('FOUND')
-                    object.splice(index, 1);
-                }
-            })
-            console.log(wine)
-            //
-            // console.log('\n\n\n')
-            // console.log(list)
-            await Wine.updateOne(
-                {userId},
-                {
-                    $set: {wine}
-                }
-            )
+        let wine = list.wine;
+        console.log(wine)
+        let wineName = '';
+        wine.forEach(function (item, index, object) {
+            if (item._id == wineToDeleteID) {
+                wineName = item.name;
+                console.log('FOUND WINE')
+                object.splice(index, 1);
+            }
+        })
+        console.log(wine)
+        const winePicPath = wineToDeletePicture.substring(1)
+        //
+        // console.log('\n\n\n')
+        // console.log(list)
+        await Wine.updateOne(
+            {userId},
+            {
+                $set: {wine}
+            }
+        )
+        console.log('TRY TO TXT')
+        fs.writeFile('./backend' + winePicPath + ' ' + new Date().toISOString() + '.txt', 'Dieser Wein kann gelöscht werden: ' + wineToDeletePicture, function (err) {
+            if (err) {
+                console.log(err)
+
+            } else {
+                console.log('File created')
+
+            }
+        })
+
 
         res.json({status: 'ok', data: 'Wein erfolgreich gelöscht', wine: wineName});
     } catch (error) {
